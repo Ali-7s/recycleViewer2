@@ -1,10 +1,9 @@
 package com.example.myfirstapp
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfirstapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,17 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val duration = Toast.LENGTH_SHORT
-        val toast = Toast.makeText(applicationContext, "", duration)
+        val rv = binding.recycleView
+        rv.layoutManager = LinearLayoutManager(this)
+        rv.adapter = MyAdapter((0..100).toList())
 
-        binding.numberTextView.setTextColor(ContextCompat.getColor(this, android.R.color.white))
-        binding.numberTextView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_purple))
-        binding.button2.text = getString(R.string.TOASTY)
-
-        binding.button2.setOnClickListener {
-            binding.numberTextView.text = getString(R.string.BIGTOAST)
-            toast.setText("ITS TOASTY")
-            toast.show()
-        }
     }
 }
